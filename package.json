@@ -19,13 +19,9 @@
   "homepage": "https://github.com/dartmouth-cs98/hack-a-thing-2-23w-megan-ren#readme",
   "devDependencies": {
     "electron": "^22.1.0",
-    "gulp": "^4.0.2",
-    "gulp-sass": "^5.1.0"
+    "electron-reload": "^2.0.0-alpha.1"
   },
   "dependencies": {
-    "electron": "^22.1.0",
-    "jsonfile": "^6.1.0",
-    "uuid": "^9.0.0"
+    "electron": "^22.1.0"
   }
 }
-

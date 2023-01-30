@@ -1,36 +1,30 @@
 const { app, BrowserWindow, BrowserView, ipcMain, Notification } = require('electron')
+// const { Window } = require('./Window')
 
 const path = require('path')
 const url = require('url')
+// const Window = require('./Window')
+const CustomWindow = require('./CustomWindow')
+const CustomView = require('./CustomView')
+const electronReload = require('electron-reload')
 
-let mainWindow 
+let browserViews = [];
 
 const createWindow = () => {
-  mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600
-  })
-
-  mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
-    protocol: 'file',
-    slashes: true
-  }))
-
-  mainWindow.on('closed', function() {
-    mainWindow = null;
-  })
-
-  const view = new BrowserView()
-  mainWindow.setBrowserView(view)
-  view.setBounds({ x: 0, y: 0, width: 500, height: 500 })
-  view.webContents.loadURL('https://electronjs.org')
-
+  win = new CustomWindow(1600, 900, true);
+  const [width, height] = win.getSize();
+  view = new CustomView(width, height, 100, win.win);
+  win.initTab(view);
 }
 
-app.whenReady().then(() => {
-  createWindow()
+ipcMain.on('openNewTab', () => {
+  let newView = new CustomView(1600, 900, 100, win.win);
+  win.addTabAndSwitch(newView);
 });
+
+app.on("ready", () => {
+  createWindow();
+})
 
 app.on('window-all-closed', function () {
   // On OS X it is common for applications and their menu bar
@@ -43,7 +37,7 @@ app.on('window-all-closed', function () {
 app.on('activate', function () {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  if (mainWindow === null) {
+  if (win === null) {
     createWindow()
   }
 });

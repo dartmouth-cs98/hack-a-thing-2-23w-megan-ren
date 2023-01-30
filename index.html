@@ -1,21 +1,37 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/css/font-awesome.css">
+    <meta charset="UTF-8"/>
     <link rel="stylesheet" href="css/main.css">
-    <style>
-      webview {
-        width: 100%;
-        height: 100%;
-      }
-    </style>
-    <title>My Electron App</title>
   </head>
-  <body id="browser">
-    <div id="views">
-      <webview id="view" class="page" src="http://www.google.com" autosize="on"></webview>
+  <body>
+    <div id="tabsBar">
+      <div class="tab active">
+        <div class="tabTitle">Tab Name</div>
+        <div class="closeButton">&#10005</div>
+      </div>
     </div>
+    
+    <div id ="titleBar">
+
+      <div id="leftPart">
+        <button class="barButton" id="backButton" tabindex="-1">&#60</button>
+        <button class="barButton" id="forwardButton" tabindex="-1">&#62</button>
+      </div>
+      
+
+      <div id="searchBarContainer">
+        <input id="searchBar">
+      </div>
+
+      <div id="rightPart">
+          <button class="barButton" id="refreshButton" tabindex="-1">&#10227</button>
+          <button class="barButton" id="plusButton" tabindex="-1">&#43</button>
+      </div>
+      
+    </div>
+
+    
   </body>
+  <script src="renderer.js"></script>
 </html>
